@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="conf:carOut">
+   <log/>
+   <switch xmlns:ns="http://org.apache.synapse/xsd" source="$axis2:HTTP_SC">
+      <case regex="200">
+         <property name="messageType" value="application/json" scope="axis2"/>
+         <send/>
+      </case>
+      <case regex="202">
+         <payloadFactory media-type="json">
+            <format>                {"Customerdata":{"CUSTOMER_CAR_MODEL":$1, "Status":"Successfully created"}}            </format>
+            <args>
+               <arg expression="$.car.CUSTOMER_CAR_MODEL" evaluator="json"/>
+            </args>
+         </payloadFactory>
+         <send/>
+      </case>
+      <default>
+         <payloadFactory media-type="json">
+            <format>{   "Message":"Error in the input"   }  </format>
+         </payloadFactory>
+         <send/>
+      </default>
+   </switch>
+   <property name="messageType" value="application/json" scope="axis2"/>
+</sequence>

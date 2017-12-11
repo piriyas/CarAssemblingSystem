@@ -1,0 +1,89 @@
+<data description="single service for whole database" disableLegacyBoxcarringMode="false" enableBatchRequests="false" enableBoxcarring="false" name="CarService4" serviceNamespace="https://car.input.wso2.com" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">Piriya</property>
+   </config>
+   <query id="select_with_key_CUSTOMER_query" useConfig="default">
+      <sql>SELECT CUSTOMER_CAR_MODEL, CUSTOMER_BODY_COLOR, CUSTOMER_ENGINE_CAPACITY, CUSTOMER_INTERIOR_MATERIAL, CUSTOMER_INTERIOR_COLOR, CUSTOMER_TIRE_SIZE, CUSTOMER_OPTIONAL_NO FROM CUSTOMER WHERE CUSTOMER_CAR_MODEL=?</sql>
+      <param name="CUSTOMER_CAR_MODEL" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <result element="CUSTOMERCollection" rowName="CUSTOMER">
+         <element column="CUSTOMER_CAR_MODEL" name="CUSTOMER_CAR_MODEL" xsdType="xs:string"/>
+         <element column="CUSTOMER_BODY_COLOR" name="CUSTOMER_BODY_COLOR" xsdType="xs:string"/>
+         <element column="CUSTOMER_ENGINE_CAPACITY" name="CUSTOMER_ENGINE_CAPACITY" xsdType="xs:integer"/>
+         <element column="CUSTOMER_INTERIOR_MATERIAL" name="CUSTOMER_INTERIOR_MATERIAL" xsdType="xs:string"/>
+         <element column="CUSTOMER_INTERIOR_COLOR" name="CUSTOMER_INTERIOR_COLOR" xsdType="xs:string"/>
+         <element column="CUSTOMER_TIRE_SIZE" name="CUSTOMER_TIRE_SIZE" xsdType="xs:integer"/>
+         <element column="CUSTOMER_OPTIONAL_NO" name="CUSTOMER_OPTIONAL_NO" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <query id="update_CUSTOMER_query" useConfig="default">
+      <sql>UPDATE CUSTOMER SET CUSTOMER_BODY_COLOR=?,CUSTOMER_ENGINE_CAPACITY=?,CUSTOMER_INTERIOR_MATERIAL=?,CUSTOMER_INTERIOR_COLOR=?,CUSTOMER_TIRE_SIZE=?,CUSTOMER_OPTIONAL_NO=? WHERE CUSTOMER_CAR_MODEL=?</sql>
+      <param name="CUSTOMER_BODY_COLOR" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CUSTOMER_ENGINE_CAPACITY" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="CUSTOMER_INTERIOR_MATERIAL" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CUSTOMER_INTERIOR_COLOR" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CUSTOMER_TIRE_SIZE" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="CUSTOMER_OPTIONAL_NO" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="CUSTOMER_CAR_MODEL" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN"/>
+   </query>
+   <query id="insert_CUSTOMER_query" useConfig="default">
+      <sql>INSERT INTO CUSTOMER(CUSTOMER_CAR_MODEL,CUSTOMER_BODY_COLOR,CUSTOMER_ENGINE_CAPACITY,CUSTOMER_INTERIOR_MATERIAL,CUSTOMER_INTERIOR_COLOR,CUSTOMER_TIRE_SIZE,CUSTOMER_OPTIONAL_NO) VALUES(?,?,?,?,?,?,?)</sql>
+      <param name="CUSTOMER_CAR_MODEL" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CUSTOMER_BODY_COLOR" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CUSTOMER_ENGINE_CAPACITY" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="CUSTOMER_INTERIOR_MATERIAL" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CUSTOMER_INTERIOR_COLOR" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CUSTOMER_TIRE_SIZE" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="CUSTOMER_OPTIONAL_NO" ordinal="7" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="delete_CUSTOMER_query" useConfig="default">
+      <sql>DELETE FROM CUSTOMER WHERE CUSTOMER_CAR_MODEL=?</sql>
+      <param name="CUSTOMER_CAR_MODEL" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+   </query>
+   <query id="select_all_CUSTOMER_query" useConfig="default">
+      <sql>SELECT CUSTOMER_CAR_MODEL, CUSTOMER_BODY_COLOR, CUSTOMER_ENGINE_CAPACITY, CUSTOMER_INTERIOR_MATERIAL, CUSTOMER_INTERIOR_COLOR, CUSTOMER_TIRE_SIZE, CUSTOMER_OPTIONAL_NO FROM CUSTOMER</sql>
+      <result element="CUSTOMERCollection" rowName="CUSTOMER">
+         <element column="CUSTOMER_CAR_MODEL" name="CUSTOMER_CAR_MODEL" xsdType="xs:string"/>
+         <element column="CUSTOMER_BODY_COLOR" name="CUSTOMER_BODY_COLOR" xsdType="xs:string"/>
+         <element column="CUSTOMER_ENGINE_CAPACITY" name="CUSTOMER_ENGINE_CAPACITY" xsdType="xs:integer"/>
+         <element column="CUSTOMER_INTERIOR_MATERIAL" name="CUSTOMER_INTERIOR_MATERIAL" xsdType="xs:string"/>
+         <element column="CUSTOMER_INTERIOR_COLOR" name="CUSTOMER_INTERIOR_COLOR" xsdType="xs:string"/>
+         <element column="CUSTOMER_TIRE_SIZE" name="CUSTOMER_TIRE_SIZE" xsdType="xs:integer"/>
+         <element column="CUSTOMER_OPTIONAL_NO" name="CUSTOMER_OPTIONAL_NO" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <operation name="select_with_key_CUSTOMER_operation">
+      <call-query href="select_with_key_CUSTOMER_query">
+         <with-param name="CUSTOMER_CAR_MODEL" query-param="CUSTOMER_CAR_MODEL"/>
+      </call-query>
+   </operation>
+   <operation name="insert_CUSTOMER_operation">
+      <call-query href="insert_CUSTOMER_query">
+         <with-param name="CUSTOMER_CAR_MODEL" query-param="CUSTOMER_CAR_MODEL"/>
+         <with-param name="CUSTOMER_INTERIOR_COLOR" query-param="CUSTOMER_INTERIOR_COLOR"/>
+         <with-param name="CUSTOMER_TIRE_SIZE" query-param="CUSTOMER_TIRE_SIZE"/>
+         <with-param name="CUSTOMER_BODY_COLOR" query-param="CUSTOMER_BODY_COLOR"/>
+         <with-param name="CUSTOMER_INTERIOR_MATERIAL" query-param="CUSTOMER_INTERIOR_MATERIAL"/>
+         <with-param name="CUSTOMER_OPTIONAL_NO" query-param="CUSTOMER_OPTIONAL_NO"/>
+         <with-param name="CUSTOMER_ENGINE_CAPACITY" query-param="CUSTOMER_ENGINE_CAPACITY"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_CUSTOMER_operation">
+      <call-query href="select_all_CUSTOMER_query"/>
+   </operation>
+   <operation name="update_CUSTOMER_operation">
+      <call-query href="update_CUSTOMER_query">
+         <with-param name="CUSTOMER_INTERIOR_COLOR" query-param="CUSTOMER_INTERIOR_COLOR"/>
+         <with-param name="CUSTOMER_TIRE_SIZE" query-param="CUSTOMER_TIRE_SIZE"/>
+         <with-param name="CUSTOMER_CAR_MODEL" query-param="CUSTOMER_CAR_MODEL"/>
+         <with-param name="CUSTOMER_BODY_COLOR" query-param="CUSTOMER_BODY_COLOR"/>
+         <with-param name="CUSTOMER_INTERIOR_MATERIAL" query-param="CUSTOMER_INTERIOR_MATERIAL"/>
+         <with-param name="CUSTOMER_OPTIONAL_NO" query-param="CUSTOMER_OPTIONAL_NO"/>
+         <with-param name="CUSTOMER_ENGINE_CAPACITY" query-param="CUSTOMER_ENGINE_CAPACITY"/>
+      </call-query>
+   </operation>
+   <operation name="delete_CUSTOMER_operation">
+      <call-query href="delete_CUSTOMER_query">
+         <with-param name="CUSTOMER_CAR_MODEL" query-param="CUSTOMER_CAR_MODEL"/>
+      </call-query>
+   </operation>
+</data>

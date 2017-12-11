@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="conf:carIn">
+   <oauthService remoteServiceUrl="https://localhost:9444/services"
+                 username="admin"
+                 password="admin"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="foo"
+             expression="get-property('query.param.CUSTOMER_CAR_MODEL')"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="b"
+             expression="get-property('query.param.CUSTOMER_BODY_COLOR')"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="ba"
+             expression="get-property('query.param.CUSTOMER_ENGINE_CAPACITY')"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="bar"
+             expression="get-property('query.param.CUSTOMER_INTERIOR_MATERIAL')"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="c"
+             expression="get-property('query.param.CUSTOMER_INTERIOR_COLOR')"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="d"
+             expression="get-property('query.param.CUSTOMER_TIRE_SIZE')"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="e"
+             expression="get-property('query.param.CUSTOMER_OPTIONAL_NO')"/>
+   <payloadFactory media-type="xml">
+      <format>
+         <p:insert_CUSTOMER_operation xmlns:p="https://car.input.wso2.com">
+            <xs:CUSTOMER_CAR_MODEL xmlns:xs="https://car.input.wso2.com">$1</xs:CUSTOMER_CAR_MODEL>
+            <xs:CUSTOMER_BODY_COLOR xmlns:xs="https://car.input.wso2.com">$2</xs:CUSTOMER_BODY_COLOR>
+            <xs:CUSTOMER_ENGINE_CAPACITY xmlns:xs="https://car.input.wso2.com">$3</xs:CUSTOMER_ENGINE_CAPACITY>
+            <xs:CUSTOMER_INTERIOR_MATERIAL xmlns:xs="https://car.input.wso2.com">$4</xs:CUSTOMER_INTERIOR_MATERIAL>
+            <xs:CUSTOMER_INTERIOR_COLOR xmlns:xs="https://car.input.wso2.com">$5</xs:CUSTOMER_INTERIOR_COLOR>
+            <xs:CUSTOMER_TIRE_SIZE xmlns:xs="https://car.input.wso2.com">$6</xs:CUSTOMER_TIRE_SIZE>
+            <xs:CUSTOMER_OPTIONAL_NO xmlns:xs="https://car.input.wso2.com">$7</xs:CUSTOMER_OPTIONAL_NO>
+         </p:insert_CUSTOMER_operation>
+      </format>
+      <args>
+         <arg expression="$.car.CUSTOMER_CAR_MODEL" evaluator="json"/>
+         <arg expression="$.car.CUSTOMER_BODY_COLOR" evaluator="json"/>
+         <arg expression="$.car.CUSTOMER_ENGINE_CAPACITY" evaluator="json"/>
+         <arg expression="$.car.CUSTOMER_INTERIOR_MATERIAL" evaluator="json"/>
+         <arg expression="$.car.CUSTOMER_INTERIOR_COLOR" evaluator="json"/>
+         <arg expression="$.car.CUSTOMER_TIRE_SIZE" evaluator="json"/>
+         <arg expression="$.car.CUSTOMER_OPTIONAL_NO" evaluator="json"/>
+      </args>
+   </payloadFactory>
+</sequence>

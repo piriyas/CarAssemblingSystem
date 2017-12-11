@@ -1,0 +1,317 @@
+<data description="single service for whole database" disableLegacyBoxcarringMode="false" enableBatchRequests="false" enableBoxcarring="false" name="DataServiceCar" serviceNamespace="https://car.data.wso2.com" serviceStatus="active">
+   <config id="default">
+      <property name="carbon_datasource_name">Piriya</property>
+   </config>
+   <query id="insert_CHASSIS_query" useConfig="default">
+      <sql>INSERT INTO CHASSIS(CHASSIS_MODEL,CHASSIS_ID,CHASSIS_TYPE,CHASSIS_DATE) VALUES(?,?,?,?)</sql>
+      <param name="CHASSIS_MODEL" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CHASSIS_ID" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="CHASSIS_TYPE" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CHASSIS_DATE" ordinal="4" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+   </query>
+   <query id="update_ENGINE_query" useConfig="default">
+      <sql>UPDATE ENGINE SET ENGINE_CAPACITY=?,ENGINE_DATE=? WHERE ENGINE_SERIAL_NO=?</sql>
+      <param name="ENGINE_CAPACITY" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="ENGINE_DATE" ordinal="2" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+      <param name="ENGINE_SERIAL_NO" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="delete_OPTIONAL_query" useConfig="default">
+      <sql>DELETE FROM OPTIONAL WHERE OPTIONAL_PART_NO=?</sql>
+      <param name="OPTIONAL_PART_NO" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="update_INTERIOR_query" useConfig="default">
+      <sql>UPDATE INTERIOR SET INTERIOR_COLOR=?,INTERIOR_MATERIAL=?,INTERIOR_DATE=? WHERE INTERIOR_COLOR_CODE=?</sql>
+      <param name="INTERIOR_COLOR" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="INTERIOR_MATERIAL" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="INTERIOR_DATE" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+      <param name="INTERIOR_COLOR_CODE" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="delete_CHASSIS_query" useConfig="default">
+      <sql>DELETE FROM CHASSIS WHERE CHASSIS_ID=?</sql>
+      <param name="CHASSIS_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="insert_INTERIOR_query" useConfig="default">
+      <sql>INSERT INTO INTERIOR(INTERIOR_COLOR,INTERIOR_COLOR_CODE,INTERIOR_MATERIAL,INTERIOR_DATE) VALUES(?,?,?,?)</sql>
+      <param name="INTERIOR_COLOR" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="INTERIOR_COLOR_CODE" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="INTERIOR_MATERIAL" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="INTERIOR_DATE" ordinal="4" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+   </query>
+   <query id="delete_EXTERIOR_query" useConfig="default">
+      <sql>DELETE FROM EXTERIOR WHERE EXTERIOR_COLOR_CODE=?</sql>
+      <param name="EXTERIOR_COLOR_CODE" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="update_CHASSIS_query" useConfig="default">
+      <sql>UPDATE CHASSIS SET CHASSIS_MODEL=?,CHASSIS_TYPE=?,CHASSIS_DATE=? WHERE CHASSIS_ID=?</sql>
+      <param name="CHASSIS_MODEL" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CHASSIS_TYPE" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="CHASSIS_DATE" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+      <param name="CHASSIS_ID" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="insert_EXTERIOR_query" useConfig="default">
+      <sql>INSERT INTO EXTERIOR(EXTERIOR_COLOR,EXTERIOR_COLOR_CODE,EXTERIOR_DATE) VALUES(?,?,?)</sql>
+      <param name="EXTERIOR_COLOR" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="EXTERIOR_COLOR_CODE" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="EXTERIOR_DATE" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+   </query>
+   <query id="select_with_key_OPTIONAL_query" useConfig="default">
+      <sql>SELECT OPTIONAL_OPTION, OPTIONAL_PART_NO, OPTIONAL_DATE FROM OPTIONAL WHERE OPTIONAL_PART_NO=?</sql>
+      <param name="OPTIONAL_PART_NO" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="OPTIONALCollection" rowName="OPTIONAL">
+         <element column="OPTIONAL_OPTION" name="OPTIONAL_OPTION" xsdType="xs:string"/>
+         <element column="OPTIONAL_PART_NO" name="OPTIONAL_PART_NO" xsdType="xs:integer"/>
+         <element column="OPTIONAL_DATE" name="OPTIONAL_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="select_with_key_INTERIOR_query" useConfig="default">
+      <sql>SELECT INTERIOR_COLOR, INTERIOR_COLOR_CODE, INTERIOR_MATERIAL, INTERIOR_DATE FROM INTERIOR WHERE INTERIOR_COLOR_CODE=?</sql>
+      <param name="INTERIOR_COLOR_CODE" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="INTERIORCollection" rowName="INTERIOR">
+         <element column="INTERIOR_COLOR" name="INTERIOR_COLOR" xsdType="xs:string"/>
+         <element column="INTERIOR_COLOR_CODE" name="INTERIOR_COLOR_CODE" xsdType="xs:integer"/>
+         <element column="INTERIOR_MATERIAL" name="INTERIOR_MATERIAL" xsdType="xs:string"/>
+         <element column="INTERIOR_DATE" name="INTERIOR_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="delete_ENGINE_query" useConfig="default">
+      <sql>DELETE FROM ENGINE WHERE ENGINE_SERIAL_NO=?</sql>
+      <param name="ENGINE_SERIAL_NO" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_with_key_EXTERIOR_query" useConfig="default">
+      <sql>SELECT EXTERIOR_COLOR, EXTERIOR_COLOR_CODE, EXTERIOR_DATE FROM EXTERIOR WHERE EXTERIOR_COLOR_CODE=?</sql>
+      <param name="EXTERIOR_COLOR_CODE" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="EXTERIORCollection" rowName="EXTERIOR">
+         <element column="EXTERIOR_COLOR" name="EXTERIOR_COLOR" xsdType="xs:string"/>
+         <element column="EXTERIOR_COLOR_CODE" name="EXTERIOR_COLOR_CODE" xsdType="xs:integer"/>
+         <element column="EXTERIOR_DATE" name="EXTERIOR_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="select_all_CHASSIS_query" useConfig="default">
+      <sql>SELECT CHASSIS_MODEL, CHASSIS_ID, CHASSIS_TYPE, CHASSIS_DATE FROM CHASSIS</sql>
+      <result element="CHASSISCollection" rowName="CHASSIS">
+         <element column="CHASSIS_MODEL" name="CHASSIS_MODEL" xsdType="xs:string"/>
+         <element column="CHASSIS_ID" name="CHASSIS_ID" xsdType="xs:integer"/>
+         <element column="CHASSIS_TYPE" name="CHASSIS_TYPE" xsdType="xs:string"/>
+         <element column="CHASSIS_DATE" name="CHASSIS_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="select_all_EXTERIOR_query" useConfig="default">
+      <sql>SELECT EXTERIOR_COLOR, EXTERIOR_COLOR_CODE, EXTERIOR_DATE FROM EXTERIOR</sql>
+      <result element="EXTERIORCollection" rowName="EXTERIOR">
+         <element column="EXTERIOR_COLOR" name="EXTERIOR_COLOR" xsdType="xs:string"/>
+         <element column="EXTERIOR_COLOR_CODE" name="EXTERIOR_COLOR_CODE" xsdType="xs:integer"/>
+         <element column="EXTERIOR_DATE" name="EXTERIOR_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="update_OPTIONAL_query" useConfig="default">
+      <sql>UPDATE OPTIONAL SET OPTIONAL_OPTION=?,OPTIONAL_DATE=? WHERE OPTIONAL_PART_NO=?</sql>
+      <param name="OPTIONAL_OPTION" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="OPTIONAL_DATE" ordinal="2" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+      <param name="OPTIONAL_PART_NO" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="delete_INTERIOR_query" useConfig="default">
+      <sql>DELETE FROM INTERIOR WHERE INTERIOR_COLOR_CODE=?</sql>
+      <param name="INTERIOR_COLOR_CODE" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_all_ENGINE_query" useConfig="default">
+      <sql>SELECT ENGINE_SERIAL_NO, ENGINE_CAPACITY, ENGINE_DATE FROM ENGINE</sql>
+      <result element="ENGINECollection" rowName="ENGINE">
+         <element column="ENGINE_SERIAL_NO" name="ENGINE_SERIAL_NO" xsdType="xs:integer"/>
+         <element column="ENGINE_CAPACITY" name="ENGINE_CAPACITY" xsdType="xs:integer"/>
+         <element column="ENGINE_DATE" name="ENGINE_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="select_with_key_CHASSIS_query" useConfig="default">
+      <sql>SELECT CHASSIS_MODEL, CHASSIS_ID, CHASSIS_TYPE, CHASSIS_DATE FROM CHASSIS WHERE CHASSIS_ID=?</sql>
+      <param name="CHASSIS_ID" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="CHASSISCollection" rowName="CHASSIS">
+         <element column="CHASSIS_MODEL" name="CHASSIS_MODEL" xsdType="xs:string"/>
+         <element column="CHASSIS_ID" name="CHASSIS_ID" xsdType="xs:integer"/>
+         <element column="CHASSIS_TYPE" name="CHASSIS_TYPE" xsdType="xs:string"/>
+         <element column="CHASSIS_DATE" name="CHASSIS_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="insert_OPTIONAL_query" useConfig="default">
+      <sql>INSERT INTO OPTIONAL(OPTIONAL_OPTION,OPTIONAL_PART_NO,OPTIONAL_DATE) VALUES(?,?,?)</sql>
+      <param name="OPTIONAL_OPTION" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="OPTIONAL_PART_NO" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="OPTIONAL_DATE" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+   </query>
+   <query id="update_EXTERIOR_query" useConfig="default">
+      <sql>UPDATE EXTERIOR SET EXTERIOR_COLOR=?,EXTERIOR_DATE=? WHERE EXTERIOR_COLOR_CODE=?</sql>
+      <param name="EXTERIOR_COLOR" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+      <param name="EXTERIOR_DATE" ordinal="2" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+      <param name="EXTERIOR_COLOR_CODE" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="select_with_key_ENGINE_query" useConfig="default">
+      <sql>SELECT ENGINE_SERIAL_NO, ENGINE_CAPACITY, ENGINE_DATE FROM ENGINE WHERE ENGINE_SERIAL_NO=?</sql>
+      <param name="ENGINE_SERIAL_NO" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <result element="ENGINECollection" rowName="ENGINE">
+         <element column="ENGINE_SERIAL_NO" name="ENGINE_SERIAL_NO" xsdType="xs:integer"/>
+         <element column="ENGINE_CAPACITY" name="ENGINE_CAPACITY" xsdType="xs:integer"/>
+         <element column="ENGINE_DATE" name="ENGINE_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="insert_ENGINE_query" useConfig="default">
+      <sql>INSERT INTO ENGINE(ENGINE_SERIAL_NO,ENGINE_CAPACITY,ENGINE_DATE) VALUES(?,?,?)</sql>
+      <param name="ENGINE_SERIAL_NO" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="ENGINE_CAPACITY" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="ENGINE_DATE" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+   </query>
+   <query id="select_all_INTERIOR_query" useConfig="default">
+      <sql>SELECT INTERIOR_COLOR, INTERIOR_COLOR_CODE, INTERIOR_MATERIAL, INTERIOR_DATE FROM INTERIOR</sql>
+      <result element="INTERIORCollection" rowName="INTERIOR">
+         <element column="INTERIOR_COLOR" name="INTERIOR_COLOR" xsdType="xs:string"/>
+         <element column="INTERIOR_COLOR_CODE" name="INTERIOR_COLOR_CODE" xsdType="xs:integer"/>
+         <element column="INTERIOR_MATERIAL" name="INTERIOR_MATERIAL" xsdType="xs:string"/>
+         <element column="INTERIOR_DATE" name="INTERIOR_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <query id="select_all_OPTIONAL_query" useConfig="default">
+      <sql>SELECT OPTIONAL_OPTION, OPTIONAL_PART_NO, OPTIONAL_DATE FROM OPTIONAL</sql>
+      <result element="OPTIONALCollection" rowName="OPTIONAL">
+         <element column="OPTIONAL_OPTION" name="OPTIONAL_OPTION" xsdType="xs:string"/>
+         <element column="OPTIONAL_PART_NO" name="OPTIONAL_PART_NO" xsdType="xs:integer"/>
+         <element column="OPTIONAL_DATE" name="OPTIONAL_DATE" xsdType="xs:dateTime"/>
+      </result>
+   </query>
+   <operation name="select_with_key_CHASSIS_operation">
+      <call-query href="select_with_key_CHASSIS_query">
+         <with-param name="CHASSIS_ID" query-param="CHASSIS_ID"/>
+      </call-query>
+   </operation>
+   <operation name="delete_ENGINE_operation">
+      <call-query href="delete_ENGINE_query">
+         <with-param name="ENGINE_SERIAL_NO" query-param="ENGINE_SERIAL_NO"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_OPTIONAL_operation">
+      <call-query href="select_all_OPTIONAL_query"/>
+   </operation>
+   <operation name="select_all_ENGINE_operation">
+      <call-query href="select_all_ENGINE_query"/>
+   </operation>
+   <operation name="select_with_key_INTERIOR_operation">
+      <call-query href="select_with_key_INTERIOR_query">
+         <with-param name="INTERIOR_COLOR_CODE" query-param="INTERIOR_COLOR_CODE"/>
+      </call-query>
+   </operation>
+   <operation name="update_OPTIONAL_operation">
+      <call-query href="update_OPTIONAL_query">
+         <with-param name="OPTIONAL_OPTION" query-param="OPTIONAL_OPTION"/>
+         <with-param name="OPTIONAL_DATE" query-param="OPTIONAL_DATE"/>
+         <with-param name="OPTIONAL_PART_NO" query-param="OPTIONAL_PART_NO"/>
+      </call-query>
+   </operation>
+   <operation name="delete_OPTIONAL_operation">
+      <call-query href="delete_OPTIONAL_query">
+         <with-param name="OPTIONAL_PART_NO" query-param="OPTIONAL_PART_NO"/>
+      </call-query>
+   </operation>
+   <operation name="delete_INTERIOR_operation">
+      <call-query href="delete_INTERIOR_query">
+         <with-param name="INTERIOR_COLOR_CODE" query-param="INTERIOR_COLOR_CODE"/>
+      </call-query>
+   </operation>
+   <operation name="insert_EXTERIOR_operation">
+      <call-query href="insert_EXTERIOR_query">
+         <with-param name="EXTERIOR_DATE" query-param="EXTERIOR_DATE"/>
+         <with-param name="EXTERIOR_COLOR_CODE" query-param="EXTERIOR_COLOR_CODE"/>
+         <with-param name="EXTERIOR_COLOR" query-param="EXTERIOR_COLOR"/>
+      </call-query>
+   </operation>
+   <operation name="update_ENGINE_operation">
+      <call-query href="update_ENGINE_query">
+         <with-param name="ENGINE_SERIAL_NO" query-param="ENGINE_SERIAL_NO"/>
+         <with-param name="ENGINE_CAPACITY" query-param="ENGINE_CAPACITY"/>
+         <with-param name="ENGINE_DATE" query-param="ENGINE_DATE"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_CHASSIS_operation">
+      <call-query href="select_all_CHASSIS_query"/>
+   </operation>
+   <operation name="update_EXTERIOR_operation">
+      <call-query href="update_EXTERIOR_query">
+         <with-param name="EXTERIOR_DATE" query-param="EXTERIOR_DATE"/>
+         <with-param name="EXTERIOR_COLOR_CODE" query-param="EXTERIOR_COLOR_CODE"/>
+         <with-param name="EXTERIOR_COLOR" query-param="EXTERIOR_COLOR"/>
+      </call-query>
+   </operation>
+   <operation name="delete_EXTERIOR_operation">
+      <call-query href="delete_EXTERIOR_query">
+         <with-param name="EXTERIOR_COLOR_CODE" query-param="EXTERIOR_COLOR_CODE"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_INTERIOR_operation">
+      <call-query href="select_all_INTERIOR_query"/>
+   </operation>
+   <operation name="select_with_key_ENGINE_operation">
+      <call-query href="select_with_key_ENGINE_query">
+         <with-param name="ENGINE_SERIAL_NO" query-param="ENGINE_SERIAL_NO"/>
+      </call-query>
+   </operation>
+   <operation name="select_with_key_OPTIONAL_operation">
+      <call-query href="select_with_key_OPTIONAL_query">
+         <with-param name="OPTIONAL_PART_NO" query-param="OPTIONAL_PART_NO"/>
+      </call-query>
+   </operation>
+   <operation name="update_INTERIOR_operation">
+      <call-query href="update_INTERIOR_query">
+         <with-param name="INTERIOR_COLOR" query-param="INTERIOR_COLOR"/>
+         <with-param name="INTERIOR_DATE" query-param="INTERIOR_DATE"/>
+         <with-param name="INTERIOR_MATERIAL" query-param="INTERIOR_MATERIAL"/>
+         <with-param name="INTERIOR_COLOR_CODE" query-param="INTERIOR_COLOR_CODE"/>
+      </call-query>
+   </operation>
+   <operation name="insert_CHASSIS_operation">
+      <call-query href="insert_CHASSIS_query">
+         <with-param name="CHASSIS_TYPE" query-param="CHASSIS_TYPE"/>
+         <with-param name="CHASSIS_ID" query-param="CHASSIS_ID"/>
+         <with-param name="CHASSIS_MODEL" query-param="CHASSIS_MODEL"/>
+         <with-param name="CHASSIS_DATE" query-param="CHASSIS_DATE"/>
+      </call-query>
+   </operation>
+   <operation name="update_CHASSIS_operation">
+      <call-query href="update_CHASSIS_query">
+         <with-param name="CHASSIS_TYPE" query-param="CHASSIS_TYPE"/>
+         <with-param name="CHASSIS_ID" query-param="CHASSIS_ID"/>
+         <with-param name="CHASSIS_MODEL" query-param="CHASSIS_MODEL"/>
+         <with-param name="CHASSIS_DATE" query-param="CHASSIS_DATE"/>
+      </call-query>
+   </operation>
+   <operation name="insert_INTERIOR_operation">
+      <call-query href="insert_INTERIOR_query">
+         <with-param name="INTERIOR_COLOR" query-param="INTERIOR_COLOR"/>
+         <with-param name="INTERIOR_DATE" query-param="INTERIOR_DATE"/>
+         <with-param name="INTERIOR_MATERIAL" query-param="INTERIOR_MATERIAL"/>
+         <with-param name="INTERIOR_COLOR_CODE" query-param="INTERIOR_COLOR_CODE"/>
+      </call-query>
+   </operation>
+   <operation name="delete_CHASSIS_operation">
+      <call-query href="delete_CHASSIS_query">
+         <with-param name="CHASSIS_ID" query-param="CHASSIS_ID"/>
+      </call-query>
+   </operation>
+   <operation name="insert_ENGINE_operation">
+      <call-query href="insert_ENGINE_query">
+         <with-param name="ENGINE_SERIAL_NO" query-param="ENGINE_SERIAL_NO"/>
+         <with-param name="ENGINE_CAPACITY" query-param="ENGINE_CAPACITY"/>
+         <with-param name="ENGINE_DATE" query-param="ENGINE_DATE"/>
+      </call-query>
+   </operation>
+   <operation name="insert_OPTIONAL_operation">
+      <call-query href="insert_OPTIONAL_query">
+         <with-param name="OPTIONAL_OPTION" query-param="OPTIONAL_OPTION"/>
+         <with-param name="OPTIONAL_DATE" query-param="OPTIONAL_DATE"/>
+         <with-param name="OPTIONAL_PART_NO" query-param="OPTIONAL_PART_NO"/>
+      </call-query>
+   </operation>
+   <operation name="select_with_key_EXTERIOR_operation">
+      <call-query href="select_with_key_EXTERIOR_query">
+         <with-param name="EXTERIOR_COLOR_CODE" query-param="EXTERIOR_COLOR_CODE"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_EXTERIOR_operation">
+      <call-query href="select_all_EXTERIOR_query"/>
+   </operation>
+</data>

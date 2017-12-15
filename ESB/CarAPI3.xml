@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="CarAPI2"
+     context="/Cardetail2">
+   <resource methods="GET" url-mapping="/test">
+      <inSequence>
+         <log>
+            <property name="InSequence" value="Inside the insequence"/>
+         </log>
+         <log>
+            <property name="OutSequence" value="********************paylod*************"/>
+         </log>
+         <payloadFactory media-type="xml">
+            <format>
+               <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                                 xmlns:car="https://car.input.wso2.com">
+                  <soapenv:Header/>
+                  <soapenv:Body>
+                     <car:select_with_key_CUSTOMER_operation>
+                        <car:Order_ID>7</car:Order_ID>
+                     </car:select_with_key_CUSTOMER_operation>
+                  </soapenv:Body>
+               </soapenv:Envelope>
+            </format>
+            <args>
+               <arg xmlns:ns="http://org.apache.synapse/xsd"
+                    evaluator="xml"
+                    expression="$url:Order_ID"/>
+            </args>
+         </payloadFactory>
+         <log level="full"/>
+         <send>
+            <endpoint>
+               <address uri="http://10.100.1.167:9773/services/MyCarService/select_with_key_CUSTOMER_operation/"
+                        format="soap12"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <log level="full"/>
+         <log>
+            <property name="OutSequence" value="Inside the Outsequence"/>
+         </log>
+         <property name="messageType"
+                   value="application/json"
+                   scope="axis2"
+                   type="STRING"/>
+         <send/>
+      </outSequence>
+   </resource>
+</api>

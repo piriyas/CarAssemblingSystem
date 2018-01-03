@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse" name="API2" context="/details2">
+   <resource methods="POST" url-mapping="/*">
+      <inSequence>
+         <payloadFactory media-type="xml">
+            <format>
+               <p:insert_Production_operation xmlns:p="https://prod.input.wso2.com">
+                  <xs:Approved_Order_ID xmlns:xs="https://prod.input.wso2.com">$1</xs:Approved_Order_ID>
+                  <xs:Order_Status xmlns:xs="https://prod.input.wso2.com">$2</xs:Order_Status>
+               </p:insert_Production_operation>
+            </format>
+            <args>
+               <arg evaluator="json" expression="$.prod.Approved_Order_ID"/>
+               <arg evaluator="json" expression="$.prod.Order_Status"/>
+            </args>
+         </payloadFactory>
+         <log level="full"/>
+         <store messageStore="RabbitMS"/>
+         <log/>
+         <log level="custom"/>
+         <log level="custom">
+            <property name="Message" value="============================================"/>
+         </log>
+      </inSequence>
+   </resource>
+</api>

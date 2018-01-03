@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="conf:PutAPI1">
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="we"
+             expression="get-property('query.param.Order_ID')"/>
+   <property xmlns:ns="http://org.apache.synapse/xsd"
+             name="yu"
+             expression="get-property('query.param.Order_Status')"/>
+   <payloadFactory media-type="xml">
+      <format>
+         <p:update_CUSTOMER_operation xmlns:p="https://car.input.wso2.com">
+            <xs:Order_Status xmlns:xs="https://car.input.wso2.com">$1</xs:Order_Status>
+            <xs:Order_ID xmlns:xs="https://car.input.wso2.com">$2</xs:Order_ID>
+         </p:update_CUSTOMER_operation>
+      </format>
+      <args>
+         <arg expression="$.car.Order_Status" evaluator="json"/>
+         <arg expression="$.car.Order_ID" evaluator="json"/>
+      </args>
+   </payloadFactory>
+</sequence>

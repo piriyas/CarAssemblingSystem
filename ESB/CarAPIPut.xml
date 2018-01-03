@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="CarAPIPut"
+     context="/CarUpdate">
+   <resource methods="PUT" url-mapping="/*">
+      <inSequence>
+         <sequence key="conf:/PutAPI1"/>
+         <call>
+            <endpoint>
+               <address uri="https://10.100.1.167:9453/services/MyCarService/" format="soap12"/>
+            </endpoint>
+         </call>
+         <sequence key="conf:/putOut1"/>
+         <respond/>
+      </inSequence>
+   </resource>
+</api>

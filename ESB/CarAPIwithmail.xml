@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="CarAPIwithmail"
+     context="/Cardetail1mail">
+   <resource methods="POST" url-mapping="/*">
+      <inSequence>
+         <sequence key="conf:/carIn1"/>
+         <call>
+            <endpoint>
+               <address uri="https://10.100.1.167:9453/services/MyCarService/" format="soap12"/>
+            </endpoint>
+         </call>
+         <log level="custom">
+            <property name="------------------------------cccc----------11111"
+                      expression="$body"/>
+         </log>
+         <sequence key="conf:/carOut1"/>
+         <respond/>
+      </inSequence>
+   </resource>
+</api>

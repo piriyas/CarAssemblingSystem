@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="CarMailAPI1"
+     context="/CarMail">
+   <resource methods="POST" url-mapping="/*">
+      <inSequence>
+         <sequence key="conf:/carIn1"/>
+         <call>
+            <endpoint>
+               <address uri="https://10.100.1.167:9453/services/MyCarService/" format="soap12"/>
+            </endpoint>
+         </call>
+         <property name="messageType" value="text/html" scope="axis2"/>
+         <property name="ContentType" value="text/html" scope="axis2"/>
+         <property name="Subject" value="Mail Notification" scope="transport"/>
+         <property name="OUT_ONLY" value="true"/>
+         <payloadFactory media-type="xml">
+            <format>
+               <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+                  <soapenv:Body>
+                     <Message xmlns="">Order Placed</Message>
+                  </soapenv:Body>
+               </soapenv:Envelope>
+            </format>
+            <args/>
+         </payloadFactory>
+         <send>
+            <endpoint>
+               <address uri="mailto:piriya@wso2.com"/>
+            </endpoint>
+         </send>
+         <sequence key="conf:/carOut1"/>
+         <respond/>
+      </inSequence>
+   </resource>
+</api>

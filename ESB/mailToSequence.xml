@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse"
+          name="mailToSequence"
+          onError="fault">
+   <property name="transport.mail.Format"
+             value="true"
+             scope="axis2"
+             type="STRING"/>
+   <property name="Subject"
+             value="File Received"
+             scope="transport"
+             type="STRING"/>
+   <log level="custom">
+      <property xmlns:ns="http://org.apache.synapse/xsd"
+                name="----------------------------------------"
+                expression="$body"/>
+   </log>
+   <payloadFactory media-type="text/plain">
+      <format>The order is placed!</format>
+      <args/>
+   </payloadFactory>
+   <log level="custom">
+      <property xmlns:ns="http://org.apache.synapse/xsd"
+                name="----------------------------------------22222"
+                expression="$body"/>
+   </log>
+   <send>
+      <endpoint>
+         <address uri="mailto:piriya@wso2.com"/>
+      </endpoint>
+   </send>
+</sequence>

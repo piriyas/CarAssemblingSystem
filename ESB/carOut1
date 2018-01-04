@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="conf:carOut1">
+   <switch xmlns:ns="http://org.apache.synapse/xsd" source="$axis2:HTTP_SC">
+      <case regex="200">
+         <property name="messageType" value="application/json" scope="axis2"/>
+         <send/>
+      </case>
+      <case regex="202">
+         <payloadFactory media-type="json">
+            <format>                {"Customerdata":{"Status":"Successfully created"}}            </format>
+         </payloadFactory>
+         <property name="FORCE_SC_ACCEPTED"
+                   value="true"
+                   scope="axis2"
+                   type="STRING"/>
+         <property name="OUT_ONLY" value="true" scope="default" type="STRING"/>
+         <send>
+            <endpoint>
+               <address uri="mailto:piriya@wso2.com"/>
+            </endpoint>
+         </send>
+         <respond/>
+         <log level="custom">
+            <property name="----------------------------------------22222" expression="$body"/>
+         </log>
+      </case>
+      <default>
+         <payloadFactory media-type="json">
+            <format>{   "Message":"Error in the input"   }  </format>
+         </payloadFactory>
+      </default>
+   </switch>
+   <property name="messageType" value="application/json" scope="axis2"/>
+</sequence>

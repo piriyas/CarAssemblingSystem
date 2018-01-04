@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://ws.apache.org/ns/synapse"
+     name="ApprovedOrderDetailAPI"
+     context="/ApprovedDetails">
+   <resource methods="GET" url-mapping="/test">
+      <inSequence>
+         <log>
+            <property name="InSequence" value="Inside the insequence"/>
+         </log>
+         <log>
+            <property name="OutSequence" value="********************paylod*************"/>
+         </log>
+         <payloadFactory media-type="xml">
+            <format>
+               <p:select_with_key_Customer_Order_operation xmlns:p="https://order.input.wso2.com"><!--Exactly 1 occurrence--><xs:id xmlns:xs="https://order.input.wso2.com">2</xs:id>
+               </p:select_with_key_Customer_Order_operation>
+            </format>
+            <args/>
+         </payloadFactory>
+         <log level="full"/>
+         <send>
+            <endpoint>
+               <address uri="http://10.100.1.167:9773/services/OrderApprovalService1/select_with_key_Customer_Order_operation/"
+                        format="soap12"/>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <log level="full"/>
+         <log>
+            <property name="OutSequence" value="Inside the Outsequence"/>
+         </log>
+         <property name="messageType"
+                   value="application/json"
+                   scope="axis2"
+                   type="STRING"/>
+         <send/>
+      </outSequence>
+   </resource>
+</api>

@@ -2,7 +2,7 @@
 <api xmlns="http://ws.apache.org/ns/synapse"
      name="CarAPIwithmail"
      context="/Cardetail1mail">
-   <resource methods="POST" url-mapping="/*">
+   <resource methods="POST" uri-template="/*">
       <inSequence>
          <sequence key="conf:/carIn1"/>
          <call>
